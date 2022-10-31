@@ -7,3 +7,5 @@
 #Third Step: activate virtual env using source cs348/bin/activate
 
 #To update requirements.txt with all the modules do: pip3 freeze > requirements.txt
+
+#To run the program type python3 application.py
