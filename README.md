@@ -9,3 +9,5 @@
 #To update requirements.txt with all the modules do: pip3 freeze > requirements.txt
 
 #To download flask use this commmand: pip install flask
+
+#To run the program type python3 application.py
