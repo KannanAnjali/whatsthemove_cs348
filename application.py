@@ -33,6 +33,14 @@ def starting_location():
 def destination_location():
     return request.form['dcity_state']
 
+@application.route("/starting_date", methods=["POST", "GET"])
+def starting_date():
+    return request.form['starting_date']
+    
+@application.route("/returning_date", methods=["POST", "GET"])
+def returning_date():
+    return request.form['returning_date']
+
 @application.route('/index-1', methods=["POST", "GET"])
 def city():
     if request.method == 'POST':
@@ -49,6 +57,8 @@ def city():
         cur.execute(query)
         conn.commit()
     return render_template("index-1.html")
+
+
 if __name__ == '__main__':
     application.run(debug=True)
     

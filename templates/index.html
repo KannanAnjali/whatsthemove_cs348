@@ -44,6 +44,22 @@
                             </form>
                         </div>                 
                 </div>
+                <div class="row" style = 'text-align:center;background-color:#9cb3d8'>
+                    <div class="dropdown" style="width:device-width;height:100px;padding: 50px;font-size:x-large;display: inline-block; text-align:center">
+                        Choose a departing date:
+                        <form method="POST" action="/starting_date">
+                            <input type="date" id="starting_date" name="starting_date">
+                          </form>
+                    </div>
+                    <div class="dropdown" style="width:device-width;height:100px;padding:50px;font-size: x-large;display: inline-block; text-align:center;">
+                        Choose a returning date:
+                        <form method="POST" action="/returning_date">
+                            <input type="date" id="returning_date" name="returning_date">
+                          </form>
+                    </div>                 
+            </div>
+            </div>
+            <div class="container">
                 <div class='row'> 
                     <div class='child inline-block-child'style="display: inline-block;padding:30px;width:device-width;">
                         <a href="{{url_for('static', filename='flights.html')}}">
@@ -74,3 +90,4 @@
 
     </body>
 <html>
+
