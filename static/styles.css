@@ -36,3 +36,6 @@ ul li:hover ul li{
   
 }
 
+.inline-block-child {
+  display: inline-block;
+}
