@@ -1,93 +1,105 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name = 'viewport' content = "with=device-width, initial-scale = 1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title> What's The Move </title>
-        <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}" type="text/css">
-    </head>
-    <body>
-        <div class="container">
-            <div class="row" style = 'background-color:#9cb3d8'> 
-                <ul>
-                    <li><a href = "#">Additional Information</a>
-                        <ul>
-                            <li><a href="{{url_for('static', filename='index-1.html')}}">Add Cities</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <img style="max-width: 100%; height: auto;" src="{{url_for('static', filename='header_final.jpg')}}">
-                <h1 style = "text-align:center;"> Hi! Let's plan a trip! </h1>
-                <div class="row" style = 'text-align:center;background-color:#9cb3d8'>
-                        <div class="dropdown" style="width:device-width;height:100px;padding: 50px;font-size:x-large;display: inline-block; text-align:center">
-                            Choose a starting location:
-                            <form method="POST" action="/select_first_location">
-                                <select name="city_state" class="selectpicker" style="width:500px;height: 60px;text-align:center;font-size: medium;margin-top: 20px;">
-                                    {% for j in city_state_lists %}
-                                        str = {{j[1], j[2]}}
-                                        <OPTION starting_value={{j[0]}}>{{j[1], j[2]}}</OPTION>
-                                    {% endfor %}
-                                </select>
-                            </form>
-                        </div>
-                        <div class="dropdown" style="width:device-width;height:100px;padding:50px;font-size: x-large;display: inline-block; text-align:center;">
-                            Choose a destination location:
-                            <form method="POST" action="/destination_location">
-                                <select name="dcity_state" class="selectpicker" style="width:500px;height: 60px;text-align:center;font-size:medium;margin-top: 20px;">
-                                    {% for j in city_state_lists %}
-                                        str = {{j[1], j[2]}}
-                                        <OPTION destination_value={{j[0]}}>{{j[1], j[2]}}</OPTION>
-                                    {% endfor %}
-                                </select>
-                            </form>
-                        </div>                 
-                </div>
-                <div class="row" style = 'text-align:center;background-color:#9cb3d8'>
-                    <div class="dropdown" style="width:device-width;height:100px;padding: 50px;font-size:x-large;display: inline-block; text-align:center">
-                        Choose a departing date:
-                        <form method="POST" action="/starting_date">
-                            <input type="date" id="starting_date" name="starting_date">
-                          </form>
-                    </div>
-                    <div class="dropdown" style="width:device-width;height:100px;padding:50px;font-size: x-large;display: inline-block; text-align:center;">
-                        Choose a returning date:
-                        <form method="POST" action="/returning_date">
-                            <input type="date" id="returning_date" name="returning_date">
-                          </form>
-                    </div>                 
-            </div>
-            </div>
-            <div class="container">
-                <div class='row'> 
-                    <div class='child inline-block-child'style="display: inline-block;padding:30px;width:device-width;">
-                        <a href="{{url_for('static', filename='flights.html')}}">
-                            <img style="width: 330px; height: 300px;margin-top: 20px;" src="{{url_for('static', filename='airplane.png')}}" />
-                        </a>
-                        <p style="text-align:center;font-size:x-large;">Flights</p>
-                    </div>
-                    <div class='child inline-block-child'style="display: inline-block;padding:30px;width:device-width;">
-                        <a href="{{url_for('static', filename='restaurant.html')}}">
-                            <img style="width: 330px; height: 300px;margin-top: 20px;" src="{{url_for('static', filename='restaurant.png')}}" />
-                        </a>
-                        <p style="text-align:center;font-size:x-large;">Restaurants</p>
-                    </div>
-                    <div class='child inline-block-child'style="display: inline-block;padding:30px;width:device-width;">
-                        <a href="{{url_for('static', filename='activities.html')}}">
-                            <img style="width: 330px; height: 300px;margin-top: 20px;" src="{{url_for('static', filename='activities.png')}}" />
-                        </a>
-                        <p style="text-align:center;font-size:x-large;">Activities</p>
-                    </div>
-                    <div class='child inline-block-child'style="display: inline-block;text-align:right;padding:30px;width:device-width;">
-                        <a href="{{url_for('static', filename='accomodations.html')}}">
-                            <img style="width: 330px; height: 300px;margin-top: 20px; margin-left:auto;" src="{{url_for('static', filename='accomodations.png')}}" />
-                        </a>
-                        <p style="text-align:center;font-size:x-large;">Accomodations</p>
-                    </div>
-                </div>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content="with=device-width, initial-scale = 1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> What's The Move </title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}" type="text/css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" style='background-color:#9cb3d8'>
+            <ul>
+                <li><a href="#">Additional Information</a>
+                    <ul>
+                        <li><a href="/cities">Add Cities</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
+        <img style="max-width: 100%; height: auto;" src="{{url_for('static', filename='header_final.jpg')}}">
+        <h1 style="text-align:center;"> Hi! Let's plan a trip! </h1>
+        <div class="row" style='text-align:center;background-color:#9cb3d8'>
+            <div class="dropdown"
+                style="width:device-width;height:100px;padding: 50px;font-size:x-large;display: inline-block; text-align:center">
+                Choose a starting location:
+                <form method="POST" action="/select_first_location">
+                    <select name="city_state" class="selectpicker"
+                        style="width:500px;height: 60px;text-align:center;font-size: medium;margin-top: 20px;">
+                        {% for j in city_state_lists %}
+                        str = {{j[1], j[2]}}
+                        <OPTION starting_value={{j[0]}}>{{j[1], j[2]}}</OPTION>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
+            <div class="dropdown"
+                style="width:device-width;height:100px;padding:50px;font-size: x-large;display: inline-block; text-align:center;">
+                Choose a destination location:
+                <form method="POST" action="/destination_location">
+                    <select name="dcity_state" class="selectpicker"
+                        style="width:500px;height: 60px;text-align:center;font-size:medium;margin-top: 20px;">
+                        {% for j in city_state_lists %}
+                        str = {{j[1], j[2]}}
+                        <OPTION destination_value={{j[0]}}>{{j[1], j[2]}}</OPTION>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
+        </div>
+        <div class="row" style='text-align:center;background-color:#9cb3d8'>
+            <div class="dropdown"
+                style="width:device-width;height:100px;padding: 50px;font-size:x-large;display: inline-block; text-align:center">
+                Choose a departing date:
+                <form method="POST" action="/starting_date">
+                    <input type="date" id="starting_date" name="starting_date">
+                </form>
+            </div>
+            <div class="dropdown"
+                style="width:device-width;height:100px;padding:50px;font-size: x-large;display: inline-block; text-align:center;">
+                Choose a returning date:
+                <form method="POST" action="/returning_date">
+                    <input type="date" id="returning_date" name="returning_date">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class='row'>
+            <div class='child inline-block-child' style="display: inline-block;padding:30px;width:device-width;">
+                <a href="/flights">
+                    <img style="width: 330px; height: 300px;margin-top: 20px;"
+                        src="{{url_for('static', filename='airplane.png')}}" />
+                </a>
+                <p style="text-align:center;font-size:x-large;">Flights</p>
+            </div>
+            <div class='child inline-block-child' style="display: inline-block;padding:30px;width:device-width;">
+                <a href="/restaurants">
+                    <img style="width: 330px; height: 300px;margin-top: 20px;"
+                        src="{{url_for('static', filename='restaurant.png')}}" />
+                </a>
+                <p style="text-align:center;font-size:x-large;">Restaurants</p>
+            </div>
+            <div class='child inline-block-child' style="display: inline-block;padding:30px;width:device-width;">
+                <a href="/activities">
+                    <img style="width: 330px; height: 300px;margin-top: 20px;"
+                        src="{{url_for('static', filename='activities.png')}}" />
+                </a>
+                <p style="text-align:center;font-size:x-large;">Activities</p>
+            </div>
+            <div class='child inline-block-child'
+                style="display: inline-block;text-align:right;padding:30px;width:device-width;">
+                <a href="/accomodations">
+                    <img style="width: 330px; height: 300px;margin-top: 20px; margin-left:auto;"
+                        src="{{url_for('static', filename='accomodations.png')}}" />
+                </a>
+                <p style="text-align:center;font-size:x-large;">Accomodations</p>
+            </div>
+        </div>
+    </div>
 
-    </body>
+</body>
 <html>
-
