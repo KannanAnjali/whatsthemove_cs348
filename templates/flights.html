@@ -1,8 +1,50 @@
-<html>
 
+<!DOCTYPE html>
+<html>
 <body>
-    <p>New page for flights</p>
-    </form>
+    <div class="container">
+        <div class="row" style = 'background-color:#9cb3d8; text-align:center;'> 
+            <img  src="{{url_for('static', filename='flight_page.png')}}">
+        </div>
+    </div>
+
+    {% for j in flights_info %}
+        <!-- flight_id = {{j[0]}}
+        state_id = {{j[1]}}
+        city_id = {{j[2]}}
+        distance = {{j[3]}}
+        cost = {{j[4]}}
+        dates = {{j[6]}}
+        types_of_ticket = {{j[7]}} -->
+        <div class="row" style="outline: thin solid; padding:10pt;"> 
+            <div class="row" style="outline: thin solid;text-align:center;"> 
+                <tr>
+                    <td>Texas, Austin</td>
+                    <td>----></td>
+                    <td>Washington, Seattle</td><br />
+                    <td>      hours?     </td><br />
+                    <td>{{j[3]}}</td>
+                    <td>miles</td>
+                </tr>
+                
+            </div>
+            <tr>
+                <td>&nbsp;&nbsp;type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>start&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>end&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td>flight number&nbsp;&nbsp; &nbsp;&nbsp;    </td>
+                <td>price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;   </td><br />
+                <td>{{j[7]}}&nbsp;&nbsp;</td>
+                <td>{{j[6]}}&nbsp;&nbsp;</td>
+                <td>{{j[6]}}&nbsp;&nbsp;</td>
+                <td>{{j[6]}}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>not in db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>{{j[4]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            </tr>
+        </div>
+    {% endfor %}
+    
 </body>
 
-</html>
+<html>

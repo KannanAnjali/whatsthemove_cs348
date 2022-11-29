@@ -39,3 +39,17 @@ ul li:hover ul li{
 .inline-block-child {
   display: inline-block;
 }
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+​.b {
+  text-align:center
+}
+.b > div {
+  vertical-align:top;
+  display:inline-block;   
+}

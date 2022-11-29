@@ -1,9 +1,8 @@
-from select import select
 from flask import Flask, render_template, request, redirect, url_for
 import pymysql
 
-application = Flask(__name__)
 
+application = Flask(__name__)
 
 # made db connection
 
@@ -22,37 +21,20 @@ def main():
     cur.execute(
         'select c.city_id, c.name, s.name from city c join state s on c.state_name = s.name')
     city_state_lists = cur.fetchall()
-    return render_template('index.html', city_state_lists=city_state_lists)
+    
+    selected = None
+    print("hello")
+    if request.method == 'POST':
+        print("inside")
+        selected = (request.form.get('city_state'))
+    print(selected)
+    return render_template('index.html',city_state_lists = city_state_lists, selected = selected)
 
-
-@application.route('/select_first_location', methods=["POST", "GET"])
-def starting_location():
-    return request.form['city_state']
-
-
-@application.route('/destination_location', methods=["POST", "GET"])
-def destination_location():
-    return request.form['dcity_state']
-
-
-@application.route("/starting_date", methods=["POST", "GET"])
-def starting_date():
-    return request.form['starting_date']
-
-
-@application.route("/returning_date", methods=["POST", "GET"])
-def returning_date():
-    return request.form['returning_date']
-
-
-@application.route("/restaurants", methods=['POST', 'GET'])
-def restaurant():
-    return render_template('restaurant.html')
-
-
-@application.route("/flights", methods=['POST', 'GET'])
+@application.route('/flight', methods=["POST", "GET"])
 def flight():
-    return render_template('flights.html')
+    cur.execute('select * from flights')
+    flights_info = cur.fetchall()
+    return render_template('flights.html', flights_info = flights_info)
 
 
 @application.route("/activities", methods=['POST', 'GET'])
@@ -85,3 +67,4 @@ def city():
 
 if __name__ == '__main__':
     application.run(debug=True)
+
