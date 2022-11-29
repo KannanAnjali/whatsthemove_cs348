@@ -14,21 +14,29 @@ conn = pymysql.connect(
 )
 
 cur = conn.cursor()
-select_dest = None
+
 
 @application.route('/', methods=['POST', 'GET'])
 def main():
+    global select_dest
     cur.execute('select c1.city_id, c1.name, s1.name,c2.name, s2.name from city c1 join state s1 on c1.state_name = s1.name, city c2 join state s2 on c2.state_name = s2.name where c1.name <> c2.name')
     city_state_lists = cur.fetchall()
     city_state_lists = list(city_state_lists)
     city_state_lists.append((-1,'starting city', 'starting state', 'destination city','destination state'))
     city_state_lists.sort(key=lambda y: y[0])
     selected = (request.form.get('city_state'))
-    print(selected)
-    return render_template('index.html', city_state_lists = city_state_lists,selected =selected)
+    if selected != None:
+        selected = selected.replace('(','')
+        selected = selected.replace(')','')
+        selected = selected.replace('\'','')
+        select_dest = selected.split(',')
+    return render_template('index.html', city_state_lists = city_state_lists, selected = selected)
 
 @application.route('/flight', methods=["POST", "GET"])
 def flight():
+    print('inside flights')
+    print(select_dest)
+    
     cur.execute('select * from flights')
     flights_info = cur.fetchall()
     return render_template('flights.html', flights_info = flights_info)
