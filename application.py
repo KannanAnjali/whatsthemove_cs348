@@ -16,11 +16,12 @@ conn = pymysql.connect(
 cur = conn.cursor()
 
 
-@application.route('/', methods=["POST", "GET"])
-
+@application.route('/', methods=['POST', 'GET'])
 def main():
-    cur.execute('select c.city_id, c.name, s.name from city c join state s on c.state_name = s.name')
+    cur.execute(
+        'select c.city_id, c.name, s.name from city c join state s on c.state_name = s.name')
     city_state_lists = cur.fetchall()
+    
     selected = None
     print("hello")
     if request.method == 'POST':
@@ -35,7 +36,18 @@ def flight():
     flights_info = cur.fetchall()
     return render_template('flights.html', flights_info = flights_info)
 
-@application.route('/index-1', methods=["POST", "GET"])
+
+@application.route("/activities", methods=['POST', 'GET'])
+def activities():
+    return render_template('activities.html')
+
+
+@application.route("/accomodations", methods=['POST', 'GET'])
+def accomodation():
+    return render_template('accomodations.html')
+
+
+@application.route('/cities', methods=['POST', 'GET'])
 def city():
     if request.method == 'POST':
         city_name = request.form['city_name']
@@ -50,10 +62,9 @@ def city():
         print(query)
         cur.execute(query)
         conn.commit()
-    return render_template("index-1.html")
+    return render_template("cities.html")
 
 
 if __name__ == '__main__':
     application.run(debug=True)
-    
 
