@@ -23,11 +23,15 @@
                 <div class="row" style = 'text-align:center;background-color:#9cb3d8'>
                         <div class="dropdown" style="width:device-width;height:100px;padding: 50px;font-size:x-large;display: inline-block; text-align:center">
                             Choose a starting location:
-                            <form method="POST" action="/select_first_location">
+                            <form method="POST">
                                 <select name="city_state" class="selectpicker" style="width:500px;height: 60px;text-align:center;font-size: medium;margin-top: 20px;">
                                     {% for j in city_state_lists %}
-                                        str = {{j[1], j[2]}}
-                                        <OPTION starting_value={{j[0]}}>{{j[1], j[2]}}</OPTION>
+                                        {% if selected == j %}
+                                            <OPTION starting_value={{j[0]}} selected>{{j[1], j[2]}}</OPTION>
+                                        {% else %}
+                                        <!-- str = {{j[1], j[2]}} -->
+                                            <OPTION starting_value={{j[0]}}>{{j[1], j[2]}}</OPTION>
+                                        {% endif %}
                                     {% endfor %}
                                 </select>
                             </form>
@@ -35,7 +39,7 @@
                         <div class="dropdown" style="width:device-width;height:100px;padding:50px;font-size: x-large;display: inline-block; text-align:center;">
                             Choose a destination location:
                             <form method="POST" action="/destination_location">
-                                <select name="dcity_state" class="selectpicker" style="width:500px;height: 60px;text-align:center;font-size:medium;margin-top: 20px;">
+                                <select id = destination_location_id name="dcity_state" class="selectpicker" style="width:500px;height: 60px;text-align:center;font-size:medium;margin-top: 20px;">
                                     {% for j in city_state_lists %}
                                         str = {{j[1], j[2]}}
                                         <OPTION destination_value={{j[0]}}>{{j[1], j[2]}}</OPTION>
@@ -62,7 +66,7 @@
             <div class="container">
                 <div class='row'> 
                     <div class='child inline-block-child'style="display: inline-block;padding:30px;width:device-width;">
-                        <a href="{{url_for('static', filename='flights.html')}}">
+                        <a href="flight">
                             <img style="width: 330px; height: 300px;margin-top: 20px;" src="{{url_for('static', filename='airplane.png')}}" />
                         </a>
                         <p style="text-align:center;font-size:x-large;">Flights</p>
