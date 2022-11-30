@@ -51,6 +51,50 @@ def activities():
 def accomodation():
     return render_template('accomodations.html')
 
+@application.route("/state", methods=['POST', 'GET'])
+def state():
+    name = request.form.get('name')
+    time_zone = request.form.get('time_zone')
+    popularity = (request.form.get('popularity'))
+    best_season = request.form.get('best_season')
+    affordability = request.form.get('affordability')
+
+    cur.execute('select name from state')
+    states = cur.fetchall()
+    states = str(states)
+    states = states.replace('(','')
+    states = states.replace(')','')
+    # states = states.replace(',','')
+    states = states.replace('\'','')
+    states = states.split(',,')
+    
+    if name not in states and name != None:
+        popularity = int(popularity)
+        print(type(name))
+        print(type(time_zone))
+        print(type(popularity))
+        print(type(best_season))
+        print(type(affordability))
+        cur.execute('select state_id from state')
+        ids = cur.fetchall()
+        ids = str(ids)
+        ids = ids.replace('(','')
+        ids = ids.replace(')','')
+        ids = ids.split(',,')
+        ids = [int(i.replace(',','')) for i in ids]
+        print(ids)
+        val = int(max(ids)) + 1
+        print(val)
+        print((val, name, time_zone, int(popularity), best_season, affordability))
+        cur.execute("INSERT INTO state (state_id, name, time_zone, popularity, best_season, affordability) VALUES ({0}, '{1}', '{2}', {3}, '{4}','{5}')".format
+                (val, name, time_zone, int(popularity), best_season, affordability))
+        conn.commit()
+
+    cur.execute('select name from state')
+    states = cur.fetchall()
+    return render_template('state.html', states = states)
+
+
 
 @application.route('/cities', methods=['POST', 'GET'])
 def city():
