@@ -1,0 +1,30 @@
+<html>
+
+<body>
+    <div class="container">
+        <div class="row" style = 'background-color:#9cb3d8; text-align:center;'> 
+            <img  src="{{url_for('static', filename='usmap.png')}}">
+        </div>
+        <form method="POST" action = '/state' style = 'text-align:center;'> 
+            <p>What State would you like to insert?</p>
+            <textarea name="name"></textarea>
+            <p>What timezone is the state in?</p>
+            <textarea name="time_zone"></textarea>
+            <p>What is the popularity of the state?</p>
+            <textarea name="popularity"></textarea>
+            <p>What is the best season of the state?</p>
+            <textarea name="best_season"></textarea>
+            <p>What is the affordability of the state?</p>
+            <textarea name="affordability"></textarea>
+            <p>List of States:</p>
+            {% for j in states %}
+                <p>{{j[0]}}</p>
+            {% endfor %}
+            <!-- <p>{{state}}</p> -->
+            <!-- <a href="/states_list" >Login</a> -->
+            <input type="submit" value ="Submit">
+        </form>
+    </div>
+</body>
+
+</html>
