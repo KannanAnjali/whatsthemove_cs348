@@ -44,7 +44,9 @@ def flight():
 
 @application.route("/activities", methods=['POST', 'GET'])
 def activities():
-    return render_template('activities.html')
+    cur.execute('select * from activities')
+    activities_info = cur.fetchall()
+    return render_template('activities.html', activities_info = activities_info)
 
 
 @application.route("/accomodations", methods=['POST', 'GET'])
