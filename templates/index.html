@@ -15,57 +15,59 @@
             <ul>
                 <li><a href="#">Additional Information</a>
                     <ul>
-                        <li><a href="{{url_for('static', filename='index-1.html')}}">Add Cities</a></li>
+                        <li><a href="/cities">Add Cities</a></li>
                         <li><a href="/state">Add States</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
-            <img style="max-width: 100%; height: auto;" src="{{url_for('static', filename='RainierViewpoint.png')}}">
-                <div class="row" style = 'text-align:center;background-color:#DAE7F8'>
-                        <div class="dropdown" style="width:device-width;height:100px;padding: 20px;font-size:x-large;display: inline-block; text-align:center">
-                            Choose a starting location and destination location:
-                            <form method="POST" action ='/'>
-                                <select name="city_state" style="width:500px;height: 60px;text-align:center;font-size: medium;margin-top: 20px;">
-                                    {% for j in city_state_lists %}
-                                        <OPTION starting_value={{j[0]}}>{{j[1], j[2], j[3], j[4]}}</OPTION>
-                                    {% endfor %}
-                                </select>
-                                <p>{{selected}}</p>
-                                <input type="submit" value ="Submit">
-                            </form>
-                        </div>
-                </div>
-
-    <div class="container">
-        <div class='row'>
-            <div class='child inline-block-child' style="display: inline-block;padding:30px;width:device-width;">
-                <a href="/flight">
-                    <img style="width: 200px; height: 200px;margin-top: 20px;"
-                        src="{{url_for('static', filename='flightsGS.png')}}" />
-                </a>
-            </div>
-            <div class='child inline-block-child' style="display: inline-block;padding:30px;width:device-width;">
-                <a href="/restaurants">
-                    <img style="width: 200px; height: 200px;margin-top: 20px;"
-                        src="{{url_for('static', filename='restaurantGS.png')}}" />
-                </a>
-            </div>
-            <div class='child inline-block-child' style="display: inline-block;padding:30px;width:device-width;">
-                <a href="/activities">
-                    <img style="width: 200px; height: 200px;margin-top: 20px;"
-                        src="{{url_for('static', filename='hikingGS.png')}}" />
-                </a>
-            </div>
-            <div class='child inline-block-child'
-                style="display: inline-block;text-align:right;padding:30px;width:device-width;">
-                <a href="/accomodations">
-                    <img style="width: 180px; height: 180px;margin-top: 20px; margin-left:auto;"
-                        src="{{url_for('static', filename='houseGS.png')}}" />
-                </a>
+        <img style="max-width: 100%; height: auto;" src="{{url_for('static', filename='RainierViewpoint.png')}}">
+        <div class="row" style='text-align:center;background-color:#DAE7F8'>
+            <div class="dropdown"
+                style="width:device-width;height:100px;padding: 20px;font-size:x-large;display: inline-block; text-align:center">
+                Choose a starting location and destination location:
+                <form method="POST" action='/'>
+                    <select name="city_state"
+                        style="width:500px;height: 60px;text-align:center;font-size: medium;margin-top: 20px;">
+                        {% for j in city_state_lists %}
+                        <OPTION starting_value={{j[0]}}>{{j[1], j[2], j[3], j[4]}}</OPTION>
+                        {% endfor %}
+                    </select>
+                    <p>{{selected}}</p>
+                    <input type="submit" value="Submit">
+                </form>
             </div>
         </div>
-    </div>
+
+        <div class="container">
+            <div class='row'>
+                <div class='child inline-block-child' style="display: inline-block;padding:30px;width:device-width;">
+                    <a href="/flight">
+                        <img style="width: 200px; height: 200px;margin-top: 20px;"
+                            src="{{url_for('static', filename='flightsGS.png')}}" />
+                    </a>
+                </div>
+                <div class='child inline-block-child' style="display: inline-block;padding:30px;width:device-width;">
+                    <a href="/restaurants">
+                        <img style="width: 200px; height: 200px;margin-top: 20px;"
+                            src="{{url_for('static', filename='restaurantGS.png')}}" />
+                    </a>
+                </div>
+                <div class='child inline-block-child' style="display: inline-block;padding:30px;width:device-width;">
+                    <a href="/activities">
+                        <img style="width: 200px; height: 200px;margin-top: 20px;"
+                            src="{{url_for('static', filename='hikingGS.png')}}" />
+                    </a>
+                </div>
+                <div class='child inline-block-child'
+                    style="display: inline-block;text-align:right;padding:30px;width:device-width;">
+                    <a href="/accomodations">
+                        <img style="width: 180px; height: 180px;margin-top: 20px; margin-left:auto;"
+                            src="{{url_for('static', filename='houseGS.png')}}" />
+                    </a>
+                </div>
+            </div>
+        </div>
 
 </body>
 <html>

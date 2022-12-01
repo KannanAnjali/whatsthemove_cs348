@@ -22,34 +22,39 @@ def main():
     cur.execute('select c1.city_id, c1.name, s1.name,c2.name, s2.name from city c1 join state s1 on c1.state_name = s1.name, city c2 join state s2 on c2.state_name = s2.name where c1.name <> c2.name')
     city_state_lists = cur.fetchall()
     city_state_lists = list(city_state_lists)
-    city_state_lists.append((-1,'starting city', 'starting state', 'destination city','destination state'))
+    city_state_lists.append(
+        (-1, 'starting city', 'starting state', 'destination city', 'destination state'))
     city_state_lists.sort(key=lambda y: y[0])
     selected = (request.form.get('city_state'))
     if selected != None:
-        selected = selected.replace('(','')
-        selected = selected.replace(')','')
-        selected = selected.replace('\'','')
+        selected = selected.replace('(', '')
+        selected = selected.replace(')', '')
+        selected = selected.replace('\'', '')
         select_dest = selected.split(',')
-    return render_template('index.html', city_state_lists = city_state_lists, selected = selected)
+    return render_template('index.html', city_state_lists=city_state_lists, selected=selected)
+
 
 @application.route('/flight', methods=["POST", "GET"])
 def flight():
     print('inside flights')
     print(select_dest)
-    
+
     cur.execute('select * from flights')
     flights_info = cur.fetchall()
-    return render_template('flights.html', flights_info = flights_info)
+    return render_template('flights.html', flights_info=flights_info)
 
 
 @application.route("/activities", methods=['POST', 'GET'])
 def activities():
-    return render_template('activities.html')
+    cur.execute('select * from activities')
+    activities_info = cur.fetchall()
+    return render_template('activities.html', activities_info = activities_info)
 
 
 @application.route("/accomodations", methods=['POST', 'GET'])
 def accomodation():
     return render_template('accomodations.html')
+
 
 @application.route("/state", methods=['POST', 'GET'])
 def state():
@@ -62,12 +67,12 @@ def state():
     cur.execute('select name from state')
     states = cur.fetchall()
     states = str(states)
-    states = states.replace('(','')
-    states = states.replace(')','')
+    states = states.replace('(', '')
+    states = states.replace(')', '')
     # states = states.replace(',','')
-    states = states.replace('\'','')
+    states = states.replace('\'', '')
     states = states.split(',,')
-    
+
     if name not in states and name != None:
         popularity = int(popularity)
         print(type(name))
@@ -78,22 +83,21 @@ def state():
         cur.execute('select state_id from state')
         ids = cur.fetchall()
         ids = str(ids)
-        ids = ids.replace('(','')
-        ids = ids.replace(')','')
+        ids = ids.replace('(', '')
+        ids = ids.replace(')', '')
         ids = ids.split(',,')
-        ids = [int(i.replace(',','')) for i in ids]
+        ids = [int(i.replace(',', '')) for i in ids]
         print(ids)
         val = int(max(ids)) + 1
         print(val)
         print((val, name, time_zone, int(popularity), best_season, affordability))
         cur.execute("INSERT INTO state (state_id, name, time_zone, popularity, best_season, affordability) VALUES ({0}, '{1}', '{2}', {3}, '{4}','{5}')".format
-                (val, name, time_zone, int(popularity), best_season, affordability))
+                    (val, name, time_zone, int(popularity), best_season, affordability))
         conn.commit()
 
     cur.execute('select name from state')
     states = cur.fetchall()
-    return render_template('state.html', states = states)
-
+    return render_template('state.html', states=states)
 
 
 @application.route('/cities', methods=['POST', 'GET'])
@@ -116,4 +120,3 @@ def city():
 
 if __name__ == '__main__':
     application.run(debug=True)
-
