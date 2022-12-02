@@ -34,13 +34,19 @@ def main():
         lists.append(i)
     lists.append([-1, 'starting city', 'starting state', 'destination city', 'destination state'])
     lists.sort(key=lambda y: y[0])
-    print(lists)
+    # print(lists)
     selected = (request.form.get('city_state'))
     if selected != None:
-        selected = selected.replace('(', '')
-        selected = selected.replace(')', '')
-        selected = selected.replace('\'', '')
-        select_dest = selected.split(',')
+        select_dest = selected
+        select_dest = select_dest.replace('(', '')
+        select_dest = select_dest.replace(')', '')
+        select_dest = select_dest.replace('\'', '')
+        select_dest = select_dest.replace(' --> ', ',')
+        select_dest = select_dest.split(',')
+        vals = []
+        for i in select_dest:
+            vals.append(i.strip())
+        select_dest = vals
     return render_template('index.html', city_state_lists=lists, selected=selected)
 
 
@@ -49,8 +55,17 @@ def flight():
     print('inside flights')
     print(select_dest)
 
-    cur.execute('select * from flights')
+    sc = '\''+str(select_dest[0])+'\''
+    ss = '\''+str(select_dest[1])+'\''
+    dc = '\''+str(select_dest[2])+'\''
+    ds = '\''+str(select_dest[3])+'\''
+    select_statement = 'select * from flights '
+    where_statement = 'where startCity='+ sc +' and startState=' + ss+' and destCity=' + dc + ' and destState=' + ds
+    statement = select_statement + where_statement
+    print(statement)
+    cur.execute(statement)
     flights_info = cur.fetchall()
+    print(flights_info)
     return render_template('flights.html', flights_info=flights_info)
 
 
