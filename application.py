@@ -55,6 +55,34 @@ def activities():
 def accomodation():
     return render_template('accomodations.html')
 
+@application.route("/index-restaurant", methods=['POST', 'GET'])
+def restaurants_add():
+    print('add restaurants!')
+    cur.execute('select name from city')
+    city_dropdown = cur.fetchall()
+    if request.form != None:
+        print('entered here')
+        name = request.form.get('Restaurant_Name')
+        type = request.form.get('restaurant_type')
+        cuisine = request.form.get('cuisine')
+        price = request.form.get('price')
+        stars = request.form.get('stars')
+        city = request.form.get('city')
+        #cur.execute('select state.name from city, state where city.state_name = state.name and city.name = {0}'.format(city))
+        #state = cur.fetchall
+        print(name, type, cuisine, price, stars, city, state)
+    return render_template('index-restaurants.html', city_dropdown = city_dropdown)
+
+
+@application.route("/restaurants", methods=['POST', 'GET'])
+def restaurants_view():
+    print('view restaurants!')
+    cur.execute('select * from restaurants')
+    restaurants_info = cur.fetchall()
+    print(restaurants_info)
+
+    return render_template('restaurant.html', restaurants_info = restaurants_info)
+
 
 @application.route("/state", methods=['POST', 'GET'])
 def state():

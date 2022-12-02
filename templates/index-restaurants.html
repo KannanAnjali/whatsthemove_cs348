@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <style>
+        #grad {
+          height: 100;
+          background-color: rgb(78, 111, 160);/* For browsers that do not support gradients */
+          background-image: linear-gradient(to right, #1c87c9, #8ebf42);
+        }
+      </style>
+</head>
+
+<body>
+    <div id="grad"> </div>
+    <div class="container">
+       
+        <div class='child inline-block-child' style="display: inline-block;padding:0px;width:device-width;">
+            <a href="/restaurants">
+                <img style="width: 120px; height: 100px;margin-top: 0px;"
+                    src="restaurantGS.png" />
+            </a>
+        </div>
+    </div>
+    <form action="/index-restaurant" method="POST">
+    
+        <p>Enter a New Restaurant Recommendation</p>
+
+        <label for="Restaurant_Name">Restaurant Name</label>
+        <p><input type="text" name="Restaurant_Name" /></p>
+
+        <label for="restaurant_type"> Type (cafe, sit-down, bakery, etc)</label>
+        <p><input type="text" name="restaurant_type"/></p>
+
+        <label for="cuisine">Cuisine</label>
+        <p><input type="text" name="cuisine" /></p>
+
+        <label for="price">Price (1-5)</label>
+        <p><input type="number" name="price" /></p>
+
+        <label for="stars">Stars (1-5)</label>
+        <p><input type="number" name="stars" /></p>
+
+        <div class="row" style = 'text-align:center;background-color:#ffffff'>
+            <div class="dropdown" style="width:device-width;height:100px;padding: 50px;font-size:x-large;display: inline-block; text-align:center">
+                City
+                <form method="POST" action ='/'>
+                    <select name="city" style="width:500px;height: 60px;text-align:center;font-size: medium;margin-top: 20px;">
+                        {% for j in city_dropdown %}
+                            <OPTION>{{j[0]}}</OPTION>
+                        {% endfor %}
+                    </select>
+                    <p>{{selected}}</p>
+                </form>
+            </div>
+    </div>
+    <input type="submit" value ="Submit">
+    </form>
+</body>
+
+</html>
