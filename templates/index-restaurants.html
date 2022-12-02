@@ -1,27 +1,10 @@
 <html>
-
-<head>
-    <style>
-        #grad {
-          height: 100;
-          background-color: rgb(78, 111, 160);/* For browsers that do not support gradients */
-          background-image: linear-gradient(to right, #1c87c9, #8ebf42);
-        }
-      </style>
-</head>
-
 <body>
-    <div id="grad"> </div>
     <div class="container">
-       
-        <div class='child inline-block-child' style="display: inline-block;padding:0px;width:device-width;">
-            <a href="/restaurants">
-                <img style="width: 120px; height: 100px;margin-top: 0px;"
-                    src="restaurantGS.png" />
-            </a>
+        <div class="row" style = 'background-color:#DAE7F8; text-align:center;'> 
+            <img  src="{{url_for('static', filename='activity_header.png')}}">
         </div>
     </div>
-    <form action="/index-restaurant" method="POST">
     
         <p>Enter a New Restaurant Recommendation</p>
 
