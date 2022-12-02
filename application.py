@@ -78,14 +78,46 @@ def flight():
 
 @application.route("/activities", methods=['POST', 'GET'])
 def activities():
-    cur.execute('select * from activities')
+    print('inside activities')
+    print(select_dest)
+    dc = '\''+str(select_dest[2])+'\''
+    ds = '\''+str(select_dest[3])+'\''
+    select_statement = 'select * from activities '
+    where_statement = 'where destCity=' + dc + ' and destState=' + ds
+    statement = select_statement + where_statement
+    print(statement)
+    cur.execute(statement)
     activities_info = cur.fetchall()
     return render_template('activities.html', activities_info = activities_info)
+
+@application.route("/index-activities", methods=['POST', 'GET'])
+def activities_add():
+    print('add activities!')
+    cur.execute('select name from city')
+    city_dropdown = cur.fetchall()
+    if request.form != None:
+        print('entered here')
+        name = request.form.get('Activity_Name')
+        category = request.form.get('category')
+        price = request.form.get('price')
+        length_of_time = request.form.get('length_of_time')
+        #cur.execute('select state.name from city, state where city.state_name = state.name and city.name = {0}'.format(city))
+        #state = cur.fetchall
+        print(name, category, price, length_of_time)
+    return render_template('index-activities.html', city_dropdown = city_dropdown)
 
 
 @application.route("/accommodations", methods=['POST', 'GET'])
 def accommodation():
-    cur.execute('select * from accommodations')
+    print('inside accommodations')
+    print(select_dest)
+    dc = '\''+str(select_dest[2])+'\''
+    ds = '\''+str(select_dest[3])+'\''
+    select_statement = 'select * from accommodations '
+    where_statement = 'where destCity=' + dc + ' and destState=' + ds
+    statement = select_statement + where_statement
+    print(statement)
+    cur.execute(statement)
     accommodations_info = cur.fetchall()
     return render_template('accommodations.html', accommodations_info=accommodations_info)
 
@@ -110,10 +142,17 @@ def restaurants_add():
 
 @application.route("/restaurants", methods=['POST', 'GET'])
 def restaurants_view():
-    print('view restaurants!')
-    cur.execute('select * from restaurants')
+    print('inside restaurant')
+    print(select_dest)
+    dc = '\''+str(select_dest[2])+'\''
+    ds = '\''+str(select_dest[3])+'\''
+    select_statement = 'select * from restaurants '
+    where_statement = 'where destCity=' + dc + ' and destState=' + ds
+    statement = select_statement + where_statement
+    print(statement)
+    cur.execute(statement)
     restaurants_info = cur.fetchall()
-    print(restaurants_info)
+    #print(restaurants_info)
 
     return render_template('restaurant.html', restaurants_info = restaurants_info)
 

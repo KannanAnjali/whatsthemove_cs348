@@ -15,12 +15,14 @@
         state_id = {{j[4]}}
         city_id = {{j[5]}}
         name = {{j[6]}}
-        stars = {{j[7]}} -->
+        stars = {{j[7]}}
+        destCity = {{j[8]}}
+        destState = {{j[9]}} -->
         <div class="row" style="outline: thin solid; padding:10pt;"> 
             <div class="row" style="outline: thin solid;text-align:center;"> 
                 <!-- <img  src="{{url_for('static', filename='flight_trail.png')}}"> -->
                 <tr>
-                    <td>Austin, Texas</td>
+                    <td>{{j[8]}}, {{j[9]}}</td>
                 </tr>
                 
             </div>
