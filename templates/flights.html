@@ -27,7 +27,9 @@
      -->
         <div class="row" style="outline: thin solid; padding:10pt;"> 
             <div class="row" style="outline: thin solid;text-align:center;"> 
+                <!-- <img  src="{{url_for('static', filename='flight.png')}}"> -->
                 <tr>
+                    
                     <td>{{j[8]}}, {{j[6]}}</td>
                     <td>----></td>
                     <td>{{j[9]}}, {{j[7]}}</td><br />
@@ -53,8 +55,17 @@
                 <td>{{j[5]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td>{{j[4]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td>{{j[12]}}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td>{{j[2]}}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>{{j[2]}}&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
             </tr>
+            <div class="row" style="outline: thin solid;"> 
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+                    <td>&nbsp;&nbsp;Airlines: {{j[3]}}</td><br />
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+                </tr>
+            </div>
         </div>
     {% endfor %}
     
