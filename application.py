@@ -22,16 +22,26 @@ def main():
     cur.execute('select c1.city_id, c1.name, s1.name,c2.name, s2.name from city c1 join state s1 on c1.state_name = s1.name, city c2 join state s2 on c2.state_name = s2.name where c1.name <> c2.name')
     city_state_lists = cur.fetchall()
     city_state_lists = list(city_state_lists)
-    city_state_lists.append(
-        (-1, 'starting city', 'starting state', 'destination city', 'destination state'))
-    city_state_lists.sort(key=lambda y: y[0])
+    lists = []
+    for i in city_state_lists:
+        i = str(i)
+        i = i.replace('(', '')
+        i = i.replace(')', '')
+        i = i.replace('\'', '')
+        i = i.replace(' ', '')
+        i = i.split(',')
+        i[0] = int(i[0])
+        lists.append(i)
+    lists.append([-1, 'starting city', 'starting state', 'destination city', 'destination state'])
+    lists.sort(key=lambda y: y[0])
+    print(lists)
     selected = (request.form.get('city_state'))
     if selected != None:
         selected = selected.replace('(', '')
         selected = selected.replace(')', '')
         selected = selected.replace('\'', '')
         select_dest = selected.split(',')
-    return render_template('index.html', city_state_lists=city_state_lists, selected=selected)
+    return render_template('index.html', city_state_lists=lists, selected=selected)
 
 
 @application.route('/flight', methods=["POST", "GET"])
