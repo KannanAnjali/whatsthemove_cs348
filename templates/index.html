@@ -31,7 +31,11 @@
                     <select name="city_state"
                         style="width:500px;height: 60px;text-align:center;font-size: medium;margin-top: 20px;">
                         {% for j in city_state_lists %}
-                        <OPTION starting_value={{j[0]}}>{{j[1], j[2], j[3], j[4]}}</OPTION>
+                        startingc = {{j[1]}}
+                        startings = {{j[2]}}
+                        destinationc = {{j[3]}}
+                        destinations = {{j[4]}}
+                        <OPTION starting_value={{j[0]}}>{{j[1]}}, {{j[2]}} --> {{j[3]}}, {{j[4]}}</OPTION>
                         {% endfor %}
                     </select>
                     <p>{{selected}}</p>
