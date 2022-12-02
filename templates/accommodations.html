@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div class="container">
+        <div class="row" style = 'background-color:#DAE7F8; text-align:center;'> 
+            <img  src="{{url_for('static', filename='accommodations_header.png')}}">
+        </div>
+    </div>
+
+    {% for j in accommodations_info %}
+        <!-- accommodation_id = {{j[0]}}
+        type = {{j[1]}}
+        price = {{j[2]}}
+        amenities = {{j[3]}}
+        stars = {{j[4]}}
+        city_id = {{j[5]}}
+        state_id = {{j[6]}}
+        availability = {{j[7]}}
+        refundable = {{j[8]}} -->
+        <div class="row" style="outline: thin solid; padding:10pt;"> 
+            <div class="row" style="outline: thin solid;text-align:center;"> 
+                <tr>
+                    <td>Texas, Austin</td><br />
+                </tr>
+                
+            </div>
+            <tr>
+                <td>Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>Amenities&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>Stars&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td>Availability&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td>Refundable?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td><br />
+                <td>{{j[2]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>{{j[3]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>{{j[4]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>{{j[7]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>{{j[8]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+            </tr>
+            <div class="row" style="outline: thin solid;"> 
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+                    <td>&nbsp;&nbsp;Accommodation Type: {{j[1]}}</td><br />
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+                </tr>
+            </div>
+        </div>
+    {% endfor %}
+    
+</body>
+
+<html>
