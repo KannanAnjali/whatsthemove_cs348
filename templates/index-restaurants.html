@@ -23,11 +23,11 @@
         <label for="stars">Stars (1-5)</label>
         <p><input type="number" name="stars" /></p>
 
-        <div class="row" style = 'text-align:center;background-color:#ffffff'>
-            <div class="dropdown" style="width:device-width;height:100px;padding: 50px;font-size:x-large;display: inline-block; text-align:center">
-                City
+        <div class="row" style = 'text-align:left;background-color:#ffffff'>
+            <div class="dropdown" style="width:device-width;height:100px;padding: 0px;font-size:medium;display: inline-block; text-align:left">
+                City (Please create a new one if not currently supported)
                 <form method="POST" action ='/'>
-                    <select name="city" style="width:500px;height: 60px;text-align:center;font-size: medium;margin-top: 20px;">
+                    <select name="city" style="width:147.5px;height:60px: 60px;text-align:center;font-size: small;margin-top: 20px;">
                         {% for j in city_dropdown %}
                             <OPTION>{{j[0]}}</OPTION>
                         {% endfor %}
