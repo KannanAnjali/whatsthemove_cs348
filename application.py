@@ -203,20 +203,35 @@ def state():
 
 @application.route('/cities', methods=['POST', 'GET'])
 def city():
+    cur.execute('select * from city')
+    cities_info = cur.fetchall()
+    values = []
+    for i in cities_info:
+        i = str(i)
+        i = i.replace('(', '')
+        i = i.replace(')', '')
+        i = i.replace('\'', '')
+        i = i.replace(' ', '')
+        i = i.split(',')
+        values.append(i)
+    cities_info = values
+    print(cities_info)
     if request.method == 'POST':
         city_name = request.form['city_name']
         cur.execute('select count(*) from city')
-        city_id = cur.fetchone()[0]
+        city_id = cur.fetchone()[0] + 1
         print(city_id)
         state_name = request.form['state_name']
         population = request.form['population']
         safety = request.form['safety']
         query = "INSERT INTO city (city_id, name, state_name, population, safety) VALUES ({0}, '{1}', '{2}', {3}, {4})".format(
             city_id, city_name, state_name, population, safety)
-        print(query)
         cur.execute(query)
         conn.commit()
-    return render_template("cities.html")
+        cur.execute('select * from city')
+        cities_info = cur.fetchall()
+
+    return render_template("cities.html", cities_info = cities_info)
 
 
 if __name__ == '__main__':
