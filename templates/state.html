@@ -2,7 +2,7 @@
 
 <body>
     <div class="container">
-        <div class="row" style = 'background-color:#9cb3d8; text-align:center;'> 
+        <div class="row" style = 'background-color:#DAE7F8; text-align:center;'> 
             <img  src="{{url_for('static', filename='usmap.png')}}">
         </div>
         <form method="POST" action = '/state' style = 'text-align:center;'> 
@@ -16,6 +16,7 @@
             <textarea name="best_season"></textarea>
             <p>What is the affordability of the state?</p>
             <textarea name="affordability"></textarea>
+            <p style ="color: crimson;">{{message}}</p>
             <p>List of States:</p>
             {% for j in states %}
                 <p>{{j[0]}}</p>
