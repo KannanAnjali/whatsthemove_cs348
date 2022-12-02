@@ -159,6 +159,7 @@ def restaurants_view():
 
 @application.route("/state", methods=['POST', 'GET'])
 def state():
+    message = ''
     name = request.form.get('name')
     time_zone = request.form.get('time_zone')
     popularity = (request.form.get('popularity'))
@@ -169,12 +170,22 @@ def state():
     states = cur.fetchall()
     states = str(states)
     states = states.replace('(', '')
+    states = states.strip()
     states = states.replace(')', '')
+    states = states.replace('\'', '')
     # states = states.replace(',','')
     states = states.replace('\'', '')
+    states = states.rstrip()
     states = states.split(',,')
-
+    vals = []
+    for i in states:
+        i = i.strip()
+        vals.append(i)
+    states = vals
+    if name in states:
+        message = 'This state already exists'
     if name not in states and name != None:
+        name = name.capitalize()
         popularity = int(popularity)
         print(type(name))
         print(type(time_zone))
@@ -198,14 +209,17 @@ def state():
 
     cur.execute('select name from state')
     states = cur.fetchall()
-    return render_template('state.html', states=states)
+    return render_template('state.html', states=states, message = message)
 
 
 @application.route('/cities', methods=['POST', 'GET'])
 def city():
+    message = ''
     cur.execute('select * from city')
     cities_info = cur.fetchall()
     values = []
+    cities_names = []
+    states_names = []
     for i in cities_info:
         i = str(i)
         i = i.replace('(', '')
@@ -214,8 +228,10 @@ def city():
         i = i.replace(' ', '')
         i = i.split(',')
         values.append(i)
+    for v in values:
+        cities_names.append(v[1])
     cities_info = values
-    print(cities_info)
+    # print(cities_info)
     if request.method == 'POST':
         city_name = request.form['city_name']
         cur.execute('select count(*) from city')
@@ -224,14 +240,17 @@ def city():
         state_name = request.form['state_name']
         population = request.form['population']
         safety = request.form['safety']
-        query = "INSERT INTO city (city_id, name, state_name, population, safety) VALUES ({0}, '{1}', '{2}', {3}, {4})".format(
-            city_id, city_name, state_name, population, safety)
-        cur.execute(query)
-        conn.commit()
-        cur.execute('select * from city')
-        cities_info = cur.fetchall()
+        city_name = city_name.capitalize()
+        state_name = state_name.capitalize()
+        if not city_name in cities_names:
+                query = "INSERT INTO city (city_id, name, state_name, population, safety) VALUES ({0}, '{1}', '{2}', {3}, {4})".format(
+                    city_id, city_name, state_name, population, safety)
+                cur.execute(query)
+                conn.commit()
+        else:
+            message = 'This city already exisits'
 
-    return render_template("cities.html", cities_info = cities_info)
+    return render_template("cities.html", cities_info = cities_info, message = message)
 
 
 if __name__ == '__main__':
