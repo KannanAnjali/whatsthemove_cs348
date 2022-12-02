@@ -35,6 +35,7 @@ def main():
     lists.append([-1, 'starting city', 'starting state', 'destination city', 'destination state'])
     lists.sort(key=lambda y: y[0])
     # print(lists)
+    values = []
     selected = (request.form.get('city_state'))
     if selected != None:
         select_dest = selected
@@ -47,7 +48,26 @@ def main():
         for i in select_dest:
             vals.append(i.strip())
         select_dest = vals
-    return render_template('index.html', city_state_lists=lists, selected=selected)
+        select_statement = 'select * from city where name = '+'\''+str(select_dest[2])+'\''
+        cur.execute(select_statement)
+        city_info = cur.fetchall()
+        city_info = list(city_info)
+        select_statement = 'select * from state where name = '+'\''+str(select_dest[3])+'\''
+        cur.execute(select_statement)
+        state_info = cur.fetchall()
+        state_info =list(state_info)
+        city_info = city_info + state_info
+        city_info = str(city_info)
+        city_info = city_info.replace('(', '')
+        city_info = city_info.replace(')', '')
+        city_info = city_info.replace('\'', '')
+        city_info = city_info.replace('[', ',')
+        city_info = city_info.replace(']', ',')
+        city_info = city_info.split(',')
+        print(city_info)
+        values = [city_info[4],city_info[5], city_info[8],city_info[10], city_info[11]]
+        print(values)
+    return render_template('index.html', city_state_lists=lists, selected=selected, city_info = values)
 
 
 @application.route('/flight', methods=["POST", "GET"])

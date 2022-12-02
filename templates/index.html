@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row" style='background-color:#DAE7F8'>
             <ul>
-                <li><a href="#">Add yo Recs</a>
+                <li><a href="#">Add your Recommendations</a>
                     <ul>
                         <li><a href="/cities">Add Cities</a></li>
                         <li><a href="/state">Add States</a></li>
@@ -45,35 +45,56 @@
             </div>
         </div>
 
-        <div class="container">
-            <div class='row'>
-                <div class='child inline-block-child' style="display: inline-block;padding:30px;width:device-width;">
+        <table style="width:100%">
+            <tr>
+                <td>
                     <a href="/flight">
                         <img style="width: 200px; height: 200px;margin-top: 20px;"
                             src="{{url_for('static', filename='flights.png')}}" />
                     </a>
-                </div>
-                <div class='child inline-block-child' style="display: inline-block;padding:30px;width:device-width;">
+                </td>
+                <td>
                     <a href="/restaurants">
-                        <img style="width: 200px; height: 200px;margin-top: 20px;"
-                            src="{{url_for('static', filename='burger.png')}}" />
+                    <img style="width: 200px; height: 200px;margin-top: 20px;"
+                    src="{{url_for('static', filename='burger.png')}}" />
                     </a>
-                </div>
-                <div class='child inline-block-child' style="display: inline-block;padding:30px;width:device-width;">
-                    <a href="/activities">
-                        <img style="width: 200px; height: 200px;margin-top: 20px;"
-                            src="{{url_for('static', filename='hiking.png')}}" />
+                </td>
+                <td><a href="/activities">
+                    <img style="width: 200px; height: 200px;margin-top: 20px;"
+                    src="{{url_for('static', filename='hiking.png')}}" />
                     </a>
-                </div>
-                <div class='child inline-block-child'
-                    style="display: inline-block;text-align:right;padding:30px;width:device-width;">
+                </td>
+                <td>
                     <a href="/accommodations">
-                        <img style="width: 200px; height: 200px;margin-top: 20px;"
-                            src="{{url_for('static', filename='house.png')}}" />
+                    <img style="width: 200px; height: 200px;margin-top: 20px;"
+                        src="{{url_for('static', filename='house.png')}}" />
                     </a>
-                </div>
-            </div>
-        </div>
-
+                </td>
+            </tr>
+          </table>
+          <p style ='font-size:x-large;'>Additional Information about the city you are visiting</p>
+          <table style="width:100%">
+            <tr>
+                <td><img  src="{{url_for('static', filename='population.png')}}"></td>
+                <td style ='font-size:x-large;'>Population: {{city_info[0]}}</td>
+            </tr>
+            <tr>
+                <td><img  src="{{url_for('static', filename='safety.png')}}"></td>
+                <td style ='font-size:x-large;'>Safety: {{city_info[1]}}</td>
+            </tr>
+            <tr>
+                <td><img  src="{{url_for('static', filename='timezone.png')}}"></td>
+                <td style ='font-size:x-large;'>Timezone: {{city_info[2]}}</td>
+            </tr>
+            <tr>
+                <td><img  src="{{url_for('static', filename='season.png')}}"></td>
+                <td style ='font-size:x-large;'>Best season to visit: {{city_info[3]}}</td>
+            </tr>
+            <tr>
+                <td><img  src="{{url_for('static', filename='cost.png')}}"></td>
+                <td style ='font-size:x-large;'>Cost to visit: {{city_info[4]}}</td>
+            </tr>
+            
+          </table>
 </body>
 <html>
