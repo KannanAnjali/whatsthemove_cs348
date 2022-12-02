@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import pymysql
-
+from datetime import datetime
 
 application = Flask(__name__)
 
@@ -65,6 +65,13 @@ def flight():
     print(statement)
     cur.execute(statement)
     flights_info = cur.fetchall()
+    vals = []
+    for i in flights_info:
+        i = list(i)
+        i[10] = i[10].strftime("%H:%M:%S")
+        i[11] = i[11].strftime("%H:%M:%S")
+        vals.append(i)
+    flights_info = vals
     print(flights_info)
     return render_template('flights.html', flights_info=flights_info)
 
