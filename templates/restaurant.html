@@ -1,14 +1,51 @@
 <!DOCTYPE html>
 <html>
-<body> 
+<body>
     <div class="container">
-       
-        <div class='child inline-block-child' style="display: inline-block;padding:30px;width:device-width;">
-            <a href="/restaurants">
-                <img style="width: 120px; height: 100px;margin-top: 20px;"
-                    src="{{url_for('static', filename='restaurantGS.png')}}" />
-            </a>
+        <div class="row" style = 'background-color:#DAE7F8; text-align:center;'> 
+            <img  src="{{url_for('static', filename='restaurant_header.png')}}">
         </div>
     </div>
+
+    {% for j in restaurants_info %}
+        <!-- restaurant_id = {{j[0]}}
+        type = {{j[1]}}
+        cuisine = {{j[2]}}
+        price = {{j[3]}}
+        state_id = {{j[4]}}
+        city_id = {{j[5]}}
+        name = {{j[6]}}
+        stars = {{j[7]}} -->
+        <div class="row" style="outline: thin solid; padding:10pt;"> 
+            <div class="row" style="outline: thin solid;text-align:center;"> 
+                <!-- <img  src="{{url_for('static', filename='flight_trail.png')}}"> -->
+                <tr>
+                    <td>Austin, Texas</td>
+                </tr>
+                
+            </div>
+            <tr>
+                <td>Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>Cuisine&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>Stars&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td>Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;   </td><br />
+                <td>{{j[1]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>{{j[2]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>{{j[7]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>{{j[3]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+            </tr>
+            <div class="row" style="outline: thin solid;"> 
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+                    <td>&nbsp;&nbsp;Restaurant Name: {{j[6]}}</td><br />
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+                </tr>
+            </div>
+        </div>
+    {% endfor %}
+    
 </body>
+
 <html>

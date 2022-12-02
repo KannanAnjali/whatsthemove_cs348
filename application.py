@@ -83,9 +83,11 @@ def activities():
     return render_template('activities.html', activities_info = activities_info)
 
 
-@application.route("/accomodations", methods=['POST', 'GET'])
-def accomodation():
-    return render_template('accomodations.html')
+@application.route("/accommodations", methods=['POST', 'GET'])
+def accommodation():
+    cur.execute('select * from accommodations')
+    accommodations_info = cur.fetchall()
+    return render_template('accommodations.html', accommodations_info=accommodations_info)
 
 @application.route("/index-restaurant", methods=['POST', 'GET'])
 def restaurants_add():

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <body>
@@ -14,31 +13,31 @@
         category = {{j[2]}}
         city_id = {{j[3]}}
         state_id = {{j[4]}}
-        price = {{j[6]}}
-        length_of_time = {{j[7]}} -->
+        price = {{j[5]}}
+        length_of_time = {{j[6]}} -->
         <div class="row" style="outline: thin solid; padding:10pt;"> 
             <div class="row" style="outline: thin solid;text-align:center;"> 
                 <tr>
-                    <td>Texas, Austin</td>
-                    <td>----></td>
-                    <td>Washington, Seattle</td><br />
+                    <td>Texas, Austin</td><br />
                 </tr>
-                
             </div>
             <tr>
-                <td>&nbsp;&nbsp;length_of_time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td>name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td>category&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td>city_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td>state_id&nbsp;&nbsp; &nbsp;&nbsp;    </td>
-                <td>price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;   </td><br />
-                <td>{{j[7]}}&nbsp;&nbsp;</td>
-                <td>{{j[1]}}&nbsp;&nbsp;</td>
-                <td>{{j[2]}}&nbsp;&nbsp;</td>
-                <td>{{j[6]}}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td>not in db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td>{{j[4]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>Category&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>length_of_time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td><br />
+                <td>{{j[2]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>{{j[5]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>{{j[6]}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
             </tr>
+            <div class="row" style="outline: thin solid;"> 
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+                    <td>&nbsp;&nbsp;Activity Name: {{j[1]}}</td><br />
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td><br />
+                </tr>
+            </div>
         </div>
     {% endfor %}
     
