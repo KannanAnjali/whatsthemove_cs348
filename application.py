@@ -32,7 +32,8 @@ def main():
         i = i.split(',')
         i[0] = int(i[0])
         lists.append(i)
-    lists.append([-1, 'starting city', 'starting state', 'destination city', 'destination state'])
+    lists.append([-1, 'starting city', 'starting state',
+                 'destination city', 'destination state'])
     lists.sort(key=lambda y: y[0])
     # print(lists)
     values = []
@@ -48,14 +49,16 @@ def main():
         for i in select_dest:
             vals.append(i.strip())
         select_dest = vals
-        select_statement = 'select * from city where name = '+'\''+str(select_dest[2])+'\''
+        select_statement = 'select * from city where name = ' + \
+            '\''+str(select_dest[2])+'\''
         cur.execute(select_statement)
         city_info = cur.fetchall()
         city_info = list(city_info)
-        select_statement = 'select * from state where name = '+'\''+str(select_dest[3])+'\''
+        select_statement = 'select * from state where name = ' + \
+            '\''+str(select_dest[3])+'\''
         cur.execute(select_statement)
         state_info = cur.fetchall()
-        state_info =list(state_info)
+        state_info = list(state_info)
         city_info = city_info + state_info
         city_info = str(city_info)
         city_info = city_info.replace('(', '')
@@ -65,9 +68,10 @@ def main():
         city_info = city_info.replace(']', ',')
         city_info = city_info.split(',')
         print(city_info)
-        values = [city_info[4],city_info[5], city_info[8],city_info[10], city_info[11]]
+        values = [city_info[4], city_info[5],
+                  city_info[8], city_info[10], city_info[11]]
         print(values)
-    return render_template('index.html', city_state_lists=lists, selected=selected, city_info = values)
+    return render_template('index.html', city_state_lists=lists, selected=selected, city_info=values)
 
 
 @application.route('/flight', methods=["POST", "GET"])
@@ -80,7 +84,8 @@ def flight():
     dc = '\''+str(select_dest[2])+'\''
     ds = '\''+str(select_dest[3])+'\''
     select_statement = 'select * from flights '
-    where_statement = 'where startCity='+ sc +' and startState=' + ss+' and destCity=' + dc + ' and destState=' + ds
+    where_statement = 'where startCity=' + sc + ' and startState=' + \
+        ss+' and destCity=' + dc + ' and destState=' + ds
     statement = select_statement + where_statement
     print(statement)
     cur.execute(statement)
@@ -108,7 +113,8 @@ def activities():
     print(statement)
     cur.execute(statement)
     activities_info = cur.fetchall()
-    return render_template('activities.html', activities_info = activities_info)
+    return render_template('activities.html', activities_info=activities_info)
+
 
 @application.route("/index-activities", methods=['POST', 'GET'])
 def activities_add():
@@ -124,7 +130,7 @@ def activities_add():
         #cur.execute('select state.name from city, state where city.state_name = state.name and city.name = {0}'.format(city))
         #state = cur.fetchall
         print(name, category, price, length_of_time)
-    return render_template('index-activities.html', city_dropdown = city_dropdown)
+    return render_template('index-activities.html', city_dropdown=city_dropdown)
 
 
 @application.route("/accommodations", methods=['POST', 'GET'])
@@ -140,6 +146,7 @@ def accommodation():
     cur.execute(statement)
     accommodations_info = cur.fetchall()
     return render_template('accommodations.html', accommodations_info=accommodations_info)
+
 
 @application.route("/index-restaurant", methods=['POST', 'GET'])
 def restaurants_add():
@@ -157,7 +164,7 @@ def restaurants_add():
         #cur.execute('select state.name from city, state where city.state_name = state.name and city.name = {0}'.format(city))
         #state = cur.fetchall
         print(name, type, cuisine, price, stars, city, state)
-    return render_template('index-restaurants.html', city_dropdown = city_dropdown)
+    return render_template('index-restaurants.html', city_dropdown=city_dropdown)
 
 
 @application.route("/restaurants", methods=['POST', 'GET'])
@@ -172,9 +179,9 @@ def restaurants_view():
     print(statement)
     cur.execute(statement)
     restaurants_info = cur.fetchall()
-    #print(restaurants_info)
+    # print(restaurants_info)
 
-    return render_template('restaurant.html', restaurants_info = restaurants_info)
+    return render_template('restaurant.html', restaurants_info=restaurants_info)
 
 
 @application.route("/state", methods=['POST', 'GET'])
@@ -229,7 +236,7 @@ def state():
 
     cur.execute('select name from state')
     states = cur.fetchall()
-    return render_template('state.html', states=states, message = message)
+    return render_template('state.html', states=states, message=message)
 
 
 @application.route('/cities', methods=['POST', 'GET'])
@@ -262,15 +269,28 @@ def city():
         safety = request.form['safety']
         city_name = city_name.capitalize()
         state_name = state_name.capitalize()
+        cur.execute('select name from state')
+        states = cur.fetchall()
         if not city_name in cities_names:
-                query = "INSERT INTO city (city_id, name, state_name, population, safety) VALUES ({0}, '{1}', '{2}', {3}, {4})".format(
-                    city_id, city_name, state_name, population, safety)
-                cur.execute(query)
-                conn.commit()
+            query = "INSERT INTO city (city_id, name, state_name, population, safety) VALUES ({0}, '{1}', '{2}', {3}, {4})".format(
+                city_id, city_name, state_name, population, safety)
+            cur.execute(query)
+            conn.commit()
         else:
             message = 'This city already exisits'
-
-    return render_template("cities.html", cities_info = cities_info, message = message)
+        if not state_name in states:
+            print(state_name)
+            cur.execute('select count(*) from state')
+            state_id = cur.fetchone()[0] + 1
+            startTrigger = "CREATE TRIGGER insertNewState AFTER INSERT on city BEGIN "
+            insertStatement = "INSERT INTO state (state_id, name, time_zone, popularity, best_season, affordability) VALUES ({0}, '{1}', '{2}', '{3}', '{4}','{5}')".format(
+                state_id, state_name, '', '', '', '')
+            endTrigger = " END"
+            trigger = startTrigger + insertStatement + endTrigger
+            print(trigger)
+            cur.execute(trigger)
+            conn.commit()
+    return render_template("cities.html", cities_info=cities_info, message=message)
 
 
 if __name__ == '__main__':
