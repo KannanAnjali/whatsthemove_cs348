@@ -193,7 +193,7 @@ def state():
     best_season = request.form.get('best_season')
     affordability = request.form.get('affordability')
 
-    cur.execute('select name from state')
+    cur.execute('CALL GetAllStates()')
     states = cur.fetchall()
     states = str(states)
     states = states.replace('(', '')
