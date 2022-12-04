@@ -1,10 +1,11 @@
 <html>
-    <div class="container">
-    <div class="row" style = 'background-color:#DAE7F8; text-align:center;'> 
-        <img  src="{{url_for('static', filename='uscities.png')}}">
+<div class="container">
+    <div class="row" style='background-color:#DAE7F8; text-align:center;'>
+        <img src="{{url_for('static', filename='uscities.png')}}">
     </div>
 </div>
-<body style = 'text-align:center;'>
+
+<body style='text-align:center;'>
     <form action="/cities" method="post">
         <p>Enter a New City Recommendation</p>
         <label for="city_name">city name</label>
@@ -17,11 +18,11 @@
         <p><input type="number" name="safety" /></p>
         <p><input type="submit" value="submit" /></p>
     </form>
-    <p style ="color: crimson;">{{message}}</p>
+    <p style="color: crimson;">{{message}}</p>
     <p>List of Cities and Information about the City</p>
     <p>City, State, Population, Safety</p>
     {% for j in cities_info %}
-        <p>{{j[1]}}, {{j[2]}}, {{j[3]}}, {{j[4]}}</p>
+    <p>{{j[1]}}, {{j[2]}}, {{j[3]}}, {{j[4]}}</p>
     {% endfor %}
 </body>
 

@@ -242,11 +242,15 @@ def state():
 @application.route('/cities', methods=['POST', 'GET'])
 def city():
     message = ''
-    cur.execute('select * from city')
-    cities_info = cur.fetchall()
+    #cur.execute('select * from city')
+    #cities_info = cur.fetchall()
     values = []
     cities_names = []
     states_names = []
+    # executing stored procedure to get all the cities in the database
+    cur.execute('CALL GetAllCities()')
+    cities_info = cur.fetchall()
+    print(cities_info)
     for i in cities_info:
         i = str(i)
         i = i.replace('(', '')
@@ -278,6 +282,7 @@ def city():
             conn.commit()
         else:
             message = 'This city already exisits'
+        """
         if not state_name in states:
             print(state_name)
             cur.execute('select count(*) from state')
@@ -290,6 +295,7 @@ def city():
             print(trigger)
             cur.execute(trigger)
             conn.commit()
+        """
     return render_template("cities.html", cities_info=cities_info, message=message)
 
 
