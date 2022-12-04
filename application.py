@@ -299,5 +299,26 @@ def city():
     return render_template("cities.html", cities_info=cities_info, message=message)
 
 
+@application.route('/showCities', methods=['POST', 'GET'])
+def showCity():
+    values = []
+    cities_names = []
+    cur.execute('CALL GetAllCities()')
+    cities_info = cur.fetchall()
+    print(cities_info)
+    for i in cities_info:
+        i = str(i)
+        i = i.replace('(', '')
+        i = i.replace(')', '')
+        i = i.replace('\'', '')
+        i = i.replace(' ', '')
+        i = i.split(',')
+        values.append(i)
+    for v in values:
+        cities_names.append(v[1])
+    cities_info = values
+    return render_template("ShowCities.html", cities_info=cities_info)
+
+
 if __name__ == '__main__':
     application.run(debug=True)
