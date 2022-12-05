@@ -5,11 +5,13 @@
             <img  src="{{url_for('static', filename='restaurant_header.png')}}">
         </div>
     </div>
+
+    <form action='/index-restaurant' method="POST">
     
         <p>Enter a New Restaurant Recommendation</p>
 
-        <label for="Restaurant_Name">Restaurant Name</label>
-        <p><input type="text" name="Restaurant_Name" /></p>
+        <label for="restaurant_name">Restaurant Name</label>
+        <p><input type="text" name="restaurant_name" /></p>
 
         <label for="restaurant_type"> Type (cafe, sit-down, bakery, etc)</label>
         <p><input type="text" name="restaurant_type"/></p>
@@ -23,20 +25,28 @@
         <label for="stars">Stars (1-5)</label>
         <p><input type="number" name="stars" /></p>
 
-        <div class="row" style = 'text-align:left;background-color:#ffffff'>
+        <label for="citystate"> City, State </label>
+        <p><input type="text" name="citystate" /></p>
+
+        <p>City, State Already Registered (If your option not there please add it before using here)</p>
+        {% for j in city_dropdown %}
+            <p> {{j[0]}}, {{j[1]}} </p>
+        {% endfor %}
+        <!-- <div class="row" style = 'text-align:left;background-color:#ffffff'>
             <div class="dropdown" style="width:device-width;height:100px;padding: 0px;font-size:medium;display: inline-block; text-align:left">
                 City (Please create a new one if not currently supported)
                 <form method="POST" action ='/'>
                     <select name="city" style="width:147.5px;height:60px; text-align:center;font-size: small;margin-top: 20px;">
                         {% for j in city_dropdown %}
-                            <OPTION>{{j[0]}}</OPTION>
+                            <OPTION>{{j[0]}},  {{j[1]}}</OPTION>
                         {% endfor %}
                     </select>
                     <p>{{selected}}</p>
+                    
                 </form>
             </div>
-    </div>
-    <input type="submit" value ="Submit">
+        </div> -->
+        <input type="submit" value ="Submit">
     </form>
 </body>
 

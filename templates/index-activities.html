@@ -5,35 +5,44 @@
             <img  src="{{url_for('static', filename='activity_header.png')}}">
         </div>
     </div>
+    <form action='/index-activities' method="POST">
     
         <p>Enter a New Activity Recommendation</p>
 
-        <label for="Activity_Name">Activity Name</label>
-        <p><input type="text" name="Activity_Name" /></p>
+        <label for="activity_name">Activity Name</label>
+        <p><input type="text" name="activity_name" /></p>
 
-        <label for="category"> Category (athletic, leisure, etc)</label>
+        <label for="category"> Category (Athletic, Leisure, i.e.)</label>
         <p><input type="text" name="category"/></p>
 
-        <label for="price">Price</label>
-        <p><input type="number" name="price" /></p>
+        <label for="price">Price (in $ per person)</label>
+        <p><input type="text" name="price" /></p>
 
-        <label for="length_of_time">Avg Length of Time)</label>
-        <p><input type="number" name="length_of_time" /></p>
+        <label for="length">Time Required (in minutes)</label>
+        <p><input type="number" name="length" /></p>
 
-        <div class="row" style = 'text-align:center;background-color:#ffffff'>
-            <div class="dropdown" style="width:device-width;height:100px;padding: 50px;font-size:x-large;display: inline-block; text-align:center">
-                City
+        <label for="citystate"> City, State </label>
+        <p><input type="text" name="citystate" /></p>
+
+        <p>City, State Already Registered (If your option not there please add it before using here)</p>
+        {% for j in city_dropdown %}
+            <p> {{j[0]}}, {{j[1]}} </p>
+        {% endfor %}
+        <!-- <div class="row" style = 'text-align:left;background-color:#ffffff'>
+            <div class="dropdown" style="width:device-width;height:100px;padding: 0px;font-size:medium;display: inline-block; text-align:left">
+                City (Please create a new one if not currently supported)
                 <form method="POST" action ='/'>
-                    <select name="city" style="width:500px;height: 60px;text-align:center;font-size: medium;margin-top: 20px;">
+                    <select name="city" style="width:147.5px;height:60px; text-align:center;font-size: small;margin-top: 20px;">
                         {% for j in city_dropdown %}
-                            <OPTION>{{j[0]}}</OPTION>
+                            <OPTION>{{j[0]}},  {{j[1]}}</OPTION>
                         {% endfor %}
                     </select>
                     <p>{{selected}}</p>
+                    
                 </form>
             </div>
-    </div>
-    <input type="submit" value ="Submit">
+        </div> -->
+        <input type="submit" value ="Submit">
     </form>
 </body>
 
