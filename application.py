@@ -113,14 +113,39 @@ def activities():
 @application.route("/index-activities", methods=['POST', 'GET'])
 def activities_add():
     print('add activities!')
-    cur.execute('select name from city')
+    cur.execute('select name, state_name from city')
     city_dropdown = cur.fetchall()
     if request.form != None:
-        print('entered here')
-        name = request.form.get('Activity_Name')
+        print('request form is not null')
+        name = request.form.get('activity_name')
         category = request.form.get('category')
         price = request.form.get('price')
-        length_of_time = request.form.get('length_of_time')
+        length_of_time = request.form.get('length')
+        city = request.form.get('citystate')
+        state = ""
+        city_id = ""
+        state_id = ""
+        if (city != None):
+            city_and_state = city.split(',')
+            city = city_and_state[0]
+            if (city_and_state[1][0] == ' '):
+                state = city_and_state[1][1:]
+            else:
+                state = city_and_state[1]
+            cur.execute('select count(*) from activities')
+            activity_id = cur.fetchone()[0] + 1
+            cur.execute("select city.city_id from city where city.name = '{0}'".format(city, state))
+            city_id_test = cur.fetchone()
+            cur.execute("select state.state_id from state where state.name = '{0}'".format(state))
+            state_id_test = cur.fetchone()
+            if (city_id_test != None and state_id_test != None):
+                city_id = city_id_test[0]
+                state_id = state_id_test[0]
+                cur.execute("INSERT INTO activities (activity_id, name, category, city_id, state_id, price, length_of_time, destCity, destState) VALUES ({0}, '{1}', '{2}', {3}, {4}, {5}, {6}, '{7}', '{8}')".format(
+                    activity_id, name, category, city_id, state_id, price, length_of_time, city, state))
+                print("added entry in database")
+                conn.commit()
+
         #cur.execute('select state.name from city, state where city.state_name = state.name and city.name = {0}'.format(city))
         #state = cur.fetchall
         print(name, category, price, length_of_time)
