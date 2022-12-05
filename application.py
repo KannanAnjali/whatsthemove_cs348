@@ -177,6 +177,7 @@ def restaurants_add():
                 cur.execute("INSERT INTO restaurants (restaurant_id, type, cuisine, price, state_id, city_id, name, stars, destCity, destState) VALUES ({0}, '{1}', '{2}', {3}, {4}, {5}, '{6}', {7}, '{8}', '{9}')".format(
                     restaurant_id, rest_type, cuisine, price, state_id, city_id, name, stars, city, state))
                 print("added entry in database")
+                conn.commit()
             print(restaurant_id, city_id, state_id)
             #cur.execute("INSERT INTO restaurants (state_id, name, time_zone, popularity, best_season, affordability) VALUES ({0}, '{1}', '{2}', {3}, '{4}','{5}')".format
             #        (val, name, time_zone, int(popularity), best_season, affordability))
