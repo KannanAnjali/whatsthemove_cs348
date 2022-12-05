@@ -1,0 +1,11 @@
+<html>
+
+<body>
+    <p>List of Cities and Information about the City</p>
+    <p>City, State, Population, Safety</p>
+    {% for j in cities_info %}
+    <p>{{j[1]}}, {{j[2]}}, {{j[3]}}, {{j[4]}}</p>
+    {% endfor %}
+</body>
+
+</html>
