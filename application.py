@@ -230,6 +230,7 @@ def state():
         val = int(max(ids)) + 1
         print(val)
         print((val, name, time_zone, int(popularity), best_season, affordability))
+        cur.execute("set transaction  ISOLATION LEVEL READ COMMITTED;")
         cur.execute("INSERT INTO state (state_id, name, time_zone, popularity, best_season, affordability) VALUES ({0}, '{1}', '{2}', {3}, '{4}','{5}')".format
                     (val, name, time_zone, int(popularity), best_season, affordability))
         conn.commit()
@@ -282,20 +283,6 @@ def city():
             conn.commit()
         else:
             message = 'This city already exisits'
-        """
-        if not state_name in states:
-            print(state_name)
-            cur.execute('select count(*) from state')
-            state_id = cur.fetchone()[0] + 1
-            startTrigger = "CREATE TRIGGER insertNewState AFTER INSERT on city BEGIN "
-            insertStatement = "INSERT INTO state (state_id, name, time_zone, popularity, best_season, affordability) VALUES ({0}, '{1}', '{2}', '{3}', '{4}','{5}')".format(
-                state_id, state_name, '', '', '', '')
-            endTrigger = " END"
-            trigger = startTrigger + insertStatement + endTrigger
-            print(trigger)
-            cur.execute(trigger)
-            conn.commit()
-        """
     return render_template("cities.html", cities_info=cities_info, message=message)
 
 
