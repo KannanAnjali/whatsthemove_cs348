@@ -144,19 +144,46 @@ def accommodation():
 @application.route("/index-restaurant", methods=['POST', 'GET'])
 def restaurants_add():
     print('add restaurants!')
-    cur.execute('select name from city')
+    cur.execute('select name, state_name from city')
     city_dropdown = cur.fetchall()
     if request.form != None:
-        print('entered here')
-        name = request.form.get('Restaurant_Name')
-        type = request.form.get('restaurant_type')
+        print('request form is not null')
+        #print(request.form.getList())
+        name = request.form.get('restaurant_name')
+        rest_type = request.form.get('restaurant_type')
         cuisine = request.form.get('cuisine')
         price = request.form.get('price')
         stars = request.form.get('stars')
-        city = request.form.get('city')
+        city = request.form.get('citystate')
+        state = ""
+        if (city != None):
+            city_and_state = city.split(',')
+            city = city_and_state[0]
+            if (city_and_state[1][0] == ' '):
+                state = city_and_state[1][1:]
+            else:
+                state = city_and_state[1]
+            cur.execute('select count(*) from restaurants')
+            restaurant_id = cur.fetchone()[0] + 1
+            city_id = ""
+            state_id = ""
+            cur.execute("select city.city_id from city where city.name = '{0}'".format(city, state))
+            city_id_test = cur.fetchone()
+            cur.execute("select state.state_id from state where state.name = '{0}'".format(state))
+            state_id_test = cur.fetchone()
+            if (city_id_test != None and state_id_test != None):
+                city_id = city_id_test[0]
+                state_id = state_id_test[0]
+                cur.execute("INSERT INTO restaurants (restaurant_id, type, cuisine, price, state_id, city_id, name, stars, destCity, destState) VALUES ({0}, '{1}', '{2}', {3}, {4}, {5}, '{6}', {7}, '{8}', '{9}')".format(
+                    restaurant_id, rest_type, cuisine, price, state_id, city_id, name, stars, city, state))
+                print("added entry in database")
+            print(restaurant_id, city_id, state_id)
+            #cur.execute("INSERT INTO restaurants (state_id, name, time_zone, popularity, best_season, affordability) VALUES ({0}, '{1}', '{2}', {3}, '{4}','{5}')".format
+            #        (val, name, time_zone, int(popularity), best_season, affordability))
         #cur.execute('select state.name from city, state where city.state_name = state.name and city.name = {0}'.format(city))
         #state = cur.fetchall
-        print(name, type, cuisine, price, stars, city, state)
+        print(name, rest_type, cuisine, price, stars, city, state)
+        #print(city)
     return render_template('index-restaurants.html', city_dropdown = city_dropdown)
 
 
