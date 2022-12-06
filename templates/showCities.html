@@ -1,11 +1,22 @@
 <html>
 
-<body>
-    <p>List of Cities and Information about the City</p>
-    <p>City, State, Population, Safety</p>
+<table cellspacing="20">
+    <tr>
+        <th style="text-align: left">City</th>
+        <th style="text-align: left">State</th>
+        <th style="text-align: left">Population</th>
+        <th style="text-align: left">Safety (1-10)</th>
+    </tr>
     {% for j in cities_info %}
-    <p>{{j[1]}}, {{j[2]}}, {{j[3]}}, {{j[4]}}</p>
+    <tr>
+
+        <td style="text-align: left">{{j[1]}}</td>
+        <td style="text-align: left">{{j[2]}}</td>
+        <td style="text-align: left">{{j[3]}}</td>
+        <td style="text-align: left">{{j[4]}}</td>
+    </tr>
     {% endfor %}
-</body>
+</table>
+
 
 </html>
