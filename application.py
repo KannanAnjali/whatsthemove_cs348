@@ -68,8 +68,8 @@ def main():
         city_info = city_info.replace(']', ',')
         city_info = city_info.split(',')
         print(city_info)
-        values = [city_info[4], city_info[5],
-                  city_info[8], city_info[10], city_info[11]]
+        values = [city_info[4], city_info[1],
+                  city_info[3], city_info[5], city_info[6]]
         print(values)
     return render_template('index.html', city_state_lists=lists, selected=selected, city_info=values)
 
@@ -140,9 +140,11 @@ def activities_add():
                 state = city_and_state[1]
             cur.execute('select count(*) from activities')
             activity_id = cur.fetchone()[0] + 1
-            cur.execute("select city.city_id from city where city.name = '{0}'".format(city, state))
+            cur.execute(
+                "select city.city_id from city where city.name = '{0}'".format(city, state))
             city_id_test = cur.fetchone()
-            cur.execute("select state.state_id from state where state.name = '{0}'".format(state))
+            cur.execute(
+                "select state.state_id from state where state.name = '{0}'".format(state))
             state_id_test = cur.fetchone()
             if (city_id_test != None and state_id_test != None):
                 city_id = city_id_test[0]
@@ -180,7 +182,7 @@ def restaurants_add():
     city_dropdown = cur.fetchall()
     if request.form != None:
         print('request form is not null')
-        #print(request.form.getList())
+        # print(request.form.getList())
         name = request.form.get('restaurant_name')
         rest_type = request.form.get('restaurant_type')
         cuisine = request.form.get('cuisine')
@@ -199,9 +201,11 @@ def restaurants_add():
             restaurant_id = cur.fetchone()[0] + 1
             city_id = ""
             state_id = ""
-            cur.execute("select city.city_id from city where city.name = '{0}'".format(city, state))
+            cur.execute(
+                "select city.city_id from city where city.name = '{0}'".format(city, state))
             city_id_test = cur.fetchone()
-            cur.execute("select state.state_id from state where state.name = '{0}'".format(state))
+            cur.execute(
+                "select state.state_id from state where state.name = '{0}'".format(state))
             state_id_test = cur.fetchone()
             if (city_id_test != None and state_id_test != None):
                 city_id = city_id_test[0]
@@ -211,14 +215,13 @@ def restaurants_add():
                 print("added entry in database")
                 conn.commit()
             print(restaurant_id, city_id, state_id)
-            #cur.execute("INSERT INTO restaurants (state_id, name, time_zone, popularity, best_season, affordability) VALUES ({0}, '{1}', '{2}', {3}, '{4}','{5}')".format
+            # cur.execute("INSERT INTO restaurants (state_id, name, time_zone, popularity, best_season, affordability) VALUES ({0}, '{1}', '{2}', {3}, '{4}','{5}')".format
             #        (val, name, time_zone, int(popularity), best_season, affordability))
         #cur.execute('select state.name from city, state where city.state_name = state.name and city.name = {0}'.format(city))
         #state = cur.fetchall
         print(name, rest_type, cuisine, price, stars, city, state)
-        #print(city)
-    return render_template('index-restaurants.html', city_dropdown = city_dropdown)
-
+        # print(city)
+    return render_template('index-restaurants.html', city_dropdown=city_dropdown)
 
 
 @application.route("/restaurants", methods=['POST', 'GET'])
