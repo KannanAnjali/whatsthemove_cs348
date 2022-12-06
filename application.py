@@ -28,7 +28,7 @@ def main():
         i = i.replace('(', '')
         i = i.replace(')', '')
         i = i.replace('\'', '')
-        i = i.replace(' ', '')
+        #i = i.replace(' ', '')
         i = i.split(',')
         i[0] = int(i[0])
         lists.append(i)
@@ -355,12 +355,13 @@ def showCity():
         i = i.replace('(', '')
         i = i.replace(')', '')
         i = i.replace('\'', '')
-        i = i.replace(' ', '')
+        #i = i.replace(' ', '')
         i = i.split(',')
         values.append(i)
     for v in values:
         cities_names.append(v[1])
     cities_info = values
+    print(cities_info)
     return render_template("ShowCities.html", cities_info=cities_info)
 
 
