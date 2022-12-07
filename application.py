@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import pymysql
 from datetime import datetime
+import itertools
 
 application = Flask(__name__)
 
@@ -68,9 +69,16 @@ def main():
         city_info = city_info.replace(']', ',')
         city_info = city_info.split(',')
         print(city_info)
-        values = [city_info[4], city_info[1],
-                  city_info[3], city_info[5], city_info[6]]
-        print(values)
+        # vals = []
+        index = 0
+        for i in city_info:
+            print(index)
+            print(i)
+            index = index + 1
+        # print(vals)
+        values = [city_info[4], city_info[5],
+                  city_info[8], city_info[10], city_info[11]]
+        # print(values)
     return render_template('index.html', city_state_lists=lists, selected=selected, city_info=values)
 
 
