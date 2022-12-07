@@ -76,8 +76,8 @@ def main():
             print(i)
             index = index + 1
         # print(vals)
-        values = [city_info[4], city_info[5],
-                  city_info[8], city_info[10], city_info[11]]
+        values = [city_info[4], city_info[1],
+                  city_info[3], city_info[5], city_info[6]]
         # print(values)
     return render_template('index.html', city_state_lists=lists, selected=selected, city_info=values)
 
