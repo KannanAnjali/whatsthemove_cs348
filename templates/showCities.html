@@ -1,5 +1,13 @@
 <html>
 
+<body>
+    <form action="/groupByState" method="post">
+        <p><input type="submit" value="Show Cities By State" /></p>
+    </form>
+    <form action="/orderBySafety" method="post">
+        <p><input type="submit" value="Order Cities By Safety" /></p>
+    </form>
+</body>
 <table cellspacing="20">
     <tr>
         <th style="text-align: left">City</th>
@@ -17,6 +25,5 @@
     </tr>
     {% endfor %}
 </table>
-
 
 </html>
