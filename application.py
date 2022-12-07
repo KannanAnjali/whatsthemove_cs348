@@ -365,5 +365,49 @@ def showCity():
     return render_template("ShowCities.html", cities_info=cities_info)
 
 
+@application.route('/groupByState', methods=['POST', 'GET'])
+def groupByState():
+    values = []
+    cities_names = []
+    cur.execute("Select * From city order by city.state_name")
+    cities_info = cur.fetchall()
+    print(cities_info)
+    for i in cities_info:
+        i = str(i)
+        i = i.replace('(', '')
+        i = i.replace(')', '')
+        i = i.replace('\'', '')
+        #i = i.replace(' ', '')
+        i = i.split(',')
+        values.append(i)
+    for v in values:
+        cities_names.append(v[1])
+    cities_info = values
+    print(cities_info)
+    return render_template("ShowCities.html", cities_info=cities_info)
+
+
+@application.route('/orderBySafety', methods=['POST', 'GET'])
+def orderBySafety():
+    values = []
+    cities_names = []
+    cur.execute("Select * From city order by city.safety")
+    cities_info = cur.fetchall()
+    print(cities_info)
+    for i in cities_info:
+        i = str(i)
+        i = i.replace('(', '')
+        i = i.replace(')', '')
+        i = i.replace('\'', '')
+        #i = i.replace(' ', '')
+        i = i.split(',')
+        values.append(i)
+    for v in values:
+        cities_names.append(v[1])
+    cities_info = values
+    print(cities_info)
+    return render_template("ShowCities.html", cities_info=cities_info)
+
+
 if __name__ == '__main__':
     application.run(debug=True)
