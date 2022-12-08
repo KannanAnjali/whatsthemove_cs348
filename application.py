@@ -295,7 +295,7 @@ def state():
         val = int(max(ids)) + 1
         print(val)
         print((val, name, time_zone, int(popularity), best_season, affordability))
-        cur.execute("set transaction  ISOLATION LEVEL READ COMMITTED;")
+        # cur.execute("set transaction  ISOLATION LEVEL READ COMMITTED;")
         cur.execute("INSERT INTO state (state_id, name, time_zone, popularity, best_season, affordability) VALUES ({0}, '{1}', '{2}', {3}, '{4}','{5}')".format
                     (val, name, time_zone, int(popularity), best_season, affordability))
         conn.commit()
@@ -331,8 +331,16 @@ def city():
     # print(cities_info)
     if request.method == 'POST':
         city_name = request.form['city_name']
-        cur.execute('select count(*) from city')
-        city_id = cur.fetchone()[0] + 1
+        cur.execute('select city_id from city')
+        city_id = cur.fetchall()
+        city_id = str(city_id)
+        city_id = city_id.replace('(', '')
+        city_id = city_id.replace(')', '')
+        city_id = city_id.split(',,')
+        city_id = [int(i.replace(',', '')) for i in city_id]
+        print(city_id)
+        # city_id = cur.fetchone()[0] + 1
+        city_id = int(max(city_id)) + 1
         print(city_id)
         state_name = request.form['state_name']
         population = request.form['population']
