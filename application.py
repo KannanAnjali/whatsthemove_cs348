@@ -146,8 +146,17 @@ def activities_add():
                 state = city_and_state[1][1:]
             else:
                 state = city_and_state[1]
-            cur.execute('select count(*) from activities')
-            activity_id = cur.fetchone()[0] + 1
+            cur.execute('select activity_id from activities')
+            # activity_id = cur.fetchone()[0] + 1
+            activity_id = cur.fetchall()
+            activity_id = str(activity_id)
+            activity_id = activity_id.replace('(', '')
+            activity_id = activity_id.replace(')', '')
+            activity_id = activity_id.split(',,')
+            activity_id = [int(i.replace(',', '')) for i in activity_id]
+            print(activity_id)
+        # city_id = cur.fetchone()[0] + 1
+            activity_id = int(max(activity_id)) + 1
             cur.execute(
                 "select city.city_id from city where city.name = '{0}'".format(city, state))
             city_id_test = cur.fetchone()
