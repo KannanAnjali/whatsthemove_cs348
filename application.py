@@ -13,6 +13,12 @@ conn = pymysql.connect(
     passwd="cs3481234!",
     db='ebdb'
 )
+def ensures_connected(f):
+    def wrapper(*args):
+        args[0].conn.ping(reconnect=True, attempts=3, delay=2)
+        return f(*args)
+
+    return wrapper
 
 cur = conn.cursor()
 
